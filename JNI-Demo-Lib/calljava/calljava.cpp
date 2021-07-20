@@ -57,11 +57,11 @@ JNIEXPORT void JNICALL Java_com_jni_calljava_TestCallJavaObject_insertObject
     // 2.通过student的class  实例化此Student对象   C++ new Student
     jobject studentObj = env->AllocObject(studentClass); // AllocObject 只实例化对象，不会调用对象的构造函数
 
-    // 方法签名的规则
+    // 3.方法签名的规则
     jmethodID setName = env->GetMethodID(studentClass, "setName", "(Ljava/lang/String;)V");
     jmethodID setAge = env->GetMethodID(studentClass, "setAge", "(I)V");
 
-    // 调用方法
+    // 4.调用方法
     jstring strValue = env->NewStringUTF("HelloJni");
     env->CallVoidMethod(studentObj, setName, strValue);
     env->CallVoidMethod(studentObj, setAge, 18);
@@ -75,6 +75,7 @@ JNIEXPORT void JNICALL Java_com_jni_calljava_TestCallJavaObject_insertObject
     env->DeleteLocalRef(studentObj);
 }
 
+//定义全局引用 必须手动去释放！！！！！
 jclass dogClass;
 JNIEXPORT void JNICALL Java_com_jni_calljava_TestCallJavaObject_testQuote
         (JNIEnv *env, jobject thiz) {
@@ -82,7 +83,8 @@ JNIEXPORT void JNICALL Java_com_jni_calljava_TestCallJavaObject_testQuote
         // 升级全局引用： JNI函数结束也不释放，反正就是不释放，必须手动释放   ----- 相当于： C++ 对象 new、手动delete
         const char *dogStr = "com/jni/calljava/Dog";
         jclass temp = env->FindClass(dogStr);
-        dogClass = static_cast<jclass>(env->NewGlobalRef(temp)); // 提升全局引用
+        // 提升全局引用
+        dogClass = static_cast<jclass>(env->NewGlobalRef(temp)); 
         // 记住：用完了，如果不用了，马上释放，C C++ 工程师的赞美
         env->DeleteLocalRef(temp);
     }
@@ -90,7 +92,9 @@ JNIEXPORT void JNICALL Java_com_jni_calljava_TestCallJavaObject_testQuote
     // <init> V  是不会变的
 
     // 构造函数一
+    //1.先获取方法签名
     jmethodID init = env->GetMethodID(dogClass, "<init>", "()V");
+    //2.执行java的构造函数
     jobject dog = env->NewObject(dogClass, init);
 
     // 构造函数2

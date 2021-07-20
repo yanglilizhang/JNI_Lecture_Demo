@@ -30,15 +30,16 @@ public class Demo1 {
 
     public static native String getStringPwd2();
 
-    // -------------  交互操作 JNI
+    // -------------  交互操作 JNI  -------------
     public native void changeName();
 
     public static native void changeAge();
 
+    //告诉native调用java方法
     public native void callAddMethod();
 
 
-    // 专门写一个函数，给native成调用
+    // 专门写一个函数，给native成调用!!!把值返回给jni层
     public int add(int number1, int number2) {
         return number1 + number2 + 8;
     }

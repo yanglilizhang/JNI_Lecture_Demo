@@ -4,7 +4,11 @@ package com.jni.dynamic.register;
  * 作者： jiangbin
  * 主页： Github: https://github.com/kusebingtang
  * 日期： 2021年05月06日 10:13 上午
- * 签名： 求之于势，不责于人！
+ * 签名： 求之于势，不责于人！https://www.jianshu.com/p/58b79d9c80d2
+ * https://www.jianshu.com/nb/48908385
+ * 演示jni的静态注册和动态注册的用法！！！
+ * 使用javah自动生成JNI C函数头文件(如果找不到类 可在src/main/java目录下执行)
+ * c++代码 通过Clion新建C++工程，com_jni_dynamic_register_TestDemo.h放入工程中
  * _              _           _     _   ____  _             _ _
  * / \   _ __   __| |_ __ ___ (_) __| | / ___|| |_ _   _  __| (_) ___
  * / _ \ | '_ \ / _` | '__/ _ \| |/ _` | \___ \| __| | | |/ _` | |/ _ \
@@ -14,8 +18,10 @@ package com.jni.dynamic.register;
  * ----------------------------------------------------------------
  */
 public class TestDemo {
-
+    //生成.h头文件 即使生成错误仍然可以生成.h文件
+//I:\gitee_study\JNI_Lecture_Demo\JNI-Demo\src\main\java>javah com.jni.dynamic.register.TestDemo
     static {
+        //调试的本地路径
         System.load("/Volumes/CodeApp/SourceWork/CPlus_workspace/JNI-Demo-Lib/cmake-build-debug/dynamic_register/libdynamicRegister.dylib");
     }
 

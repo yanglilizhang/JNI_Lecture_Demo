@@ -41,11 +41,14 @@ int dynamicMethod02(JNIEnv *env, jobject thiz, jstring valueStr) { // 也OK
     void*       fnPtr;     // 函数指针
  } JNINativeMethod;
  */
+//java中的native方法名称,调用native参数和返回值,native方法返回值和方法名称
+//{"dynamicJavaMethod02", "(Ljava/lang/String;)I", (int *) (dynamicMethod02)},
 static const JNINativeMethod jniNativeMethod[] = {
         {"dynamicJavaMethod01", "()V",                   (void *) (dynamicMethod01)},
         {"dynamicJavaMethod02", "(Ljava/lang/String;)I", (int *) (dynamicMethod02)},
 };
 
+//这个路径就是java调用native方法的类的路径
 const char *mainClassName = "com/jni/dynamic/register/TestDemo";
 // JNI JNI_OnLoad函数，如果你不写JNI_OnLoad，默认就有JNI_OnLoad，如果你写JNI_OnLoad函数 覆写默认的JNI_OnLoad函数
 extern "C"
@@ -64,7 +67,7 @@ JNIEXPORT jint JNI_OnLoad(JavaVM *javaVm, void *) {
 
     jclass mainClass = jniEnv->FindClass(mainClassName);
 
-    // jint RegisterNatives(Class, 我们的数组==jniNativeMethod， 注册的数量 = 2)
+    // jint RegisterNatives(Class（java中含有native方法的类）, 我们的数组==jniNativeMethod， 注册的数量 = 2)
     jniEnv->RegisterNatives(mainClass,
                             jniNativeMethod,
                             sizeof(jniNativeMethod) / sizeof(JNINativeMethod));

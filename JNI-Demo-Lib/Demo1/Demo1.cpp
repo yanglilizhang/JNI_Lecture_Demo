@@ -12,6 +12,8 @@ JNIEXPORT jstring JNICALL Java_com_jni_test_Demo1_getStringPwd
 JNIEXPORT jstring JNICALL Java_com_jni_test_Demo1_getStringPwd2
         (JNIEnv * , jclass) {}
 
+//jobject thiz的话就需要寻找类
+//jclass jClass一般就是操作java中的静态相关的属性和方法        
 JNIEXPORT void JNICALL Java_com_jni_test_Demo1_changeName
         (JNIEnv * env, jobject thiz) {
     // 获取class
@@ -32,9 +34,8 @@ JNIEXPORT void JNICALL Java_com_jni_test_Demo1_changeName
 
     // 修改成 Beyond
     jstring jName = env->NewStringUTF("Beyond");
-    env->
-    SetObjectField(thiz, j_fid, jName
-);
+    //改变java一般属性的值
+    env-> SetObjectField(thiz, j_fid, jName);
 
 // printf()  C
 // cout << << endl; // C++
@@ -44,9 +45,11 @@ extern "C"
 JNIEXPORT void JNICALL
         Java_com_jni_test_Demo1_changeAge(JNIEnv * env, jclass jClass) {
 
+    //因为java中的age为静态 可直接操作age
     jfieldID j_fide = env->GetStaticFieldID(jClass,"age","I");
     jint age = env->GetStaticIntField(jClass,j_fide);
     age+=10;
+    //改变java静态属性的值
     env->SetStaticIntField(jClass,j_fide,age);
 
 }
@@ -54,12 +57,14 @@ JNIEXPORT void JNICALL
 
 JNIEXPORT void JNICALL Java_com_jni_test_Demo1_callAddMethod (JNIEnv *env,
                                                               jobject job) {
-        //class
+        //找到java的相关class
         jclass  mainClass = env->GetObjectClass(job);
-        // GetMethodID(MainActivity.class, 方法名, 方法的签名)
+
+        //找到相关方法
+        // GetMethodID(MainActivity.class, java中的方法名, 方法的签名)
         jmethodID j_mid = env->GetMethodID(mainClass, "add", "(II)I");
 
-        // 调用 Java的方法
+        // 调用 Java的方法 并接收了java的返回值
         jint sum = env->CallIntMethod(job, j_mid, 3, 3);
         printf("sum result:%d", sum);
 
