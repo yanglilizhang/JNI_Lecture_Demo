@@ -50,6 +50,7 @@ public class Test1 implements Runnable {
         }
 
         System.out.println("join end");
+
     }
 
 }

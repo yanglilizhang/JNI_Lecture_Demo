@@ -1,4 +1,4 @@
-package com.jni.more;
+package com.jni.more.future;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -40,4 +40,34 @@ public class CompletableFuture01 {
 //        }
         return 5 + Math.random() * 20;
     }
+
+    // TODO: 2021/7/22  CompletableFuture 异常处理
+
+//    程序运行避免不了错误，那么CompletableFuture是如何处理异常的呢，先看以下代码，
+//    如果在supplyAsync()任务中发生错误，那么就不会调用任何thenApply()的回调，
+//    如果在第一个thenApply()回调中发生错误，则不会调用第二个及以后的，依此类推。
+
+//    CompletableFuture.supplyAsync(() -> {
+//        // Code which might throw an exception
+//        return "Some result";
+//    }).thenApply(result -> {
+//        return "processed result";
+//    }).thenApply(result -> {
+//        return "result after further processing";
+//    }).thenAccept(result -> {
+//        // do something with the final result
+//    });
+
+    // TODO: 2021/7/22  使用exceptionly()回调处理异常
+
+//    public static void main(String[] args) throws ExecutionException, InterruptedException {
+//        CompletableFuture<Integer> maturityFuture = CompletableFuture.supplyAsync(() -> {
+//            return  1/0;
+//        }).exceptionally(ex -> {
+//            ex.printStackTrace();
+//            return 1;
+//        });
+//        System.out.println(maturityFuture.get());
+//    }
+
 }
