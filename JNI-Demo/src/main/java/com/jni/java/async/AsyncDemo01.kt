@@ -1,11 +1,9 @@
-package com.jni.more.async
+package com.jni.java.async
 
 import java.lang.Thread.sleep
-import java.util.*
 import java.util.concurrent.*
 import java.util.concurrent.atomic.AtomicInteger
 import java.util.concurrent.locks.ReentrantLock
-import java.util.function.BiFunction
 
 //TODO ***************************************************
 //TODO 实现线程同步的N种方法

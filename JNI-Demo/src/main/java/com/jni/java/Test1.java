@@ -1,4 +1,4 @@
-package com.jni.more;
+package com.jni.java;
 
 /**
  * join的用法，哪个线程调用join哪个线程就插队先执行

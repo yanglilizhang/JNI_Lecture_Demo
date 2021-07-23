@@ -1,4 +1,4 @@
-package com.jni.more.async
+package com.jni.java.async
 
 import java.lang.Thread.sleep
 

@@ -1,13 +1,9 @@
-package com.jni.more.future;
+package com.jni.java.future;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * 将多个 CompletableFuture 组合在一起

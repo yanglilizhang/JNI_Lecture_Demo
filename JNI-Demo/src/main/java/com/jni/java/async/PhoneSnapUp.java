@@ -1,4 +1,4 @@
-package com.jni.more.async;
+package com.jni.java.async;
 
 /**
  * 多线程-同步方法与同步代码块

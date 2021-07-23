@@ -1,31 +1,18 @@
-package com.jni.more.顺序打印;
-
-import java.util.concurrent.CountDownLatch;
+package com.jni.java.顺序打印;
 
 /**
- * 通过CountDownLatch（倒计数）使线程按顺序执行
- * 应用场景:比如有一个任务C，它要等待其他任务A,B执行完毕之后才能执行，
- * 此时就可以利用CountDownLatch来实现这种功能了。
+ * @author wwj
+ * 通过子程序join使线程按顺序执行
+ * join():是Theard的方法，作用是调用线程需等待该join()线程执行完成后，才能继续用下运行。
+ * 应用场景：当一个线程必须等待另一个线程执行完毕才能执行时可以使用join方法。
  */
-public class ThreadCountDownLatchDemo {
-
-    /**
-     * 用于判断线程一是否执行，倒计时设置为1，执行后减1
-     */
-    private static CountDownLatch c1 = new CountDownLatch(1);
-
-    /**
-     * 用于判断线程二是否执行，倒计时设置为1，执行后减1
-     */
-    private static CountDownLatch c2 = new CountDownLatch(1);
+public class ThreadJoinDemo {
 
     public static void main(String[] args) {
         final Thread thread1 = new Thread(new Runnable() {
             @Override
             public void run() {
                 System.out.println("产品经理规划新需求");
-                //对c1倒计时-1
-                c1.countDown();
             }
         });
 
@@ -33,11 +20,8 @@ public class ThreadCountDownLatchDemo {
             @Override
             public void run() {
                 try {
-                    //等待c1倒计时，计时为0则往下运行
-                    c1.await();
+                    thread1.join();
                     System.out.println("开发人员开发新需求功能");
-                    //对c2倒计时-1
-                    c2.countDown();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -48,8 +32,7 @@ public class ThreadCountDownLatchDemo {
             @Override
             public void run() {
                 try {
-                    //等待c2倒计时，计时为0则往下运行
-                    c2.await();
+                    thread2.join();
                     System.out.println("测试人员测试新功能");
                 } catch (InterruptedException e) {
                     e.printStackTrace();

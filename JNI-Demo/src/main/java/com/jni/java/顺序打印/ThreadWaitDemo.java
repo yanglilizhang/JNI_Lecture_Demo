@@ -1,4 +1,4 @@
-package com.jni.more.顺序打印;
+package com.jni.java.顺序打印;
 
 /**
  * 3.使用线程的wait方法

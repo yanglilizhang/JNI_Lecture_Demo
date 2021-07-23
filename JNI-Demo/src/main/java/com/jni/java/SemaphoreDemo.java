@@ -1,4 +1,4 @@
-package com.jni.more;
+package com.jni.java;
 
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;

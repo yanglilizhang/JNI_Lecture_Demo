@@ -1,4 +1,4 @@
-package com.jni.more;
+package com.jni.java;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;

@@ -1,4 +1,4 @@
-package com.jni.more.顺序打印;
+package com.jni.java.顺序打印;
 
 /**
  * 通过主程序join使线程按顺序执行

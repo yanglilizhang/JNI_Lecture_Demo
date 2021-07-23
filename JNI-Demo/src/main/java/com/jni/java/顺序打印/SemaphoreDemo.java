@@ -1,18 +1,19 @@
-package com.jni.more.顺序打印;
+package com.jni.java.顺序打印;
+
+import java.util.concurrent.Semaphore;
 
 /**
- * @author wwj
- * 通过子程序join使线程按顺序执行
- * join():是Theard的方法，作用是调用线程需等待该join()线程执行完成后，才能继续用下运行。
- * 应用场景：当一个线程必须等待另一个线程执行完毕才能执行时可以使用join方法。
+ * 使用Sephmore(信号量)实现线程按顺序运行
  */
-public class ThreadJoinDemo {
-
+public class SemaphoreDemo {
+    private static Semaphore semaphore1 = new Semaphore(1);
+    private static Semaphore semaphore2 = new Semaphore(1);
     public static void main(String[] args) {
         final Thread thread1 = new Thread(new Runnable() {
             @Override
             public void run() {
                 System.out.println("产品经理规划新需求");
+//                semaphore1.release();
             }
         });
 
@@ -20,8 +21,9 @@ public class ThreadJoinDemo {
             @Override
             public void run() {
                 try {
-                    thread1.join();
+                    semaphore1.acquire();
                     System.out.println("开发人员开发新需求功能");
+                    semaphore2.release();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -32,7 +34,9 @@ public class ThreadJoinDemo {
             @Override
             public void run() {
                 try {
+                    semaphore2.acquire();
                     thread2.join();
+                    semaphore2.release();
                     System.out.println("测试人员测试新功能");
                 } catch (InterruptedException e) {
                     e.printStackTrace();

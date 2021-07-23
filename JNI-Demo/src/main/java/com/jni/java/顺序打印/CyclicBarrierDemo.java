@@ -1,4 +1,4 @@
-package com.jni.more.顺序打印;
+package com.jni.java.顺序打印;
 
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;

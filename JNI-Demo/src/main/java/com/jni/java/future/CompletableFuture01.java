@@ -1,4 +1,4 @@
-package com.jni.more.future;
+package com.jni.java.future;
 
 import java.util.concurrent.CompletableFuture;
 
