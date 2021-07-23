@@ -1,7 +1,7 @@
 package com.jni.dynamic.register;
 
 /**
- * 作者： jiangbin
+ * 作者： jiangbin https://github.com/kusebingtang/JNI_Lecture_Demo
  * 主页： Github: https://github.com/kusebingtang
  * 日期： 2021年05月06日 10:13 上午
  * 签名： 求之于势，不责于人！https://www.jianshu.com/p/58b79d9c80d2
