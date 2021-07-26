@@ -78,6 +78,8 @@ JNIEXPORT void JNICALL Java_com_jni_thread_TestDemo_naitveThread
     myContext->instance = env->NewGlobalRef(job); // 提升全局引用
 
     pthread_t pid;
+    //对于本地库中创建的线程，需要使用AttachCurrentThread来附加到 JavaVM来获取一个可用的JNIEnv。
+    //线程退出或不再需要使用JNIEnv时，必须通过调用DetachCurrentThread来解除连接。
     pthread_create(&pid, nullptr, myThreadTaskAction, myContext);
     pthread_join(pid, nullptr);
 

@@ -7,6 +7,8 @@
 
 using namespace std;
 
+//JNIEnv只在创建它的线程有效，不能跨线程传递，不能再线程之间共享 JNIEnv。
+
 JNIEXPORT jstring JNICALL Java_com_jni_dynamic_register_TestDemo_stringFromJNI
         (JNIEnv *env, jobject thiz) {
     std::string hello = "默认就是静态注册哦";
@@ -52,8 +54,11 @@ static const JNINativeMethod jniNativeMethod[] = {
 const char *mainClassName = "com/jni/dynamic/register/TestDemo";
 // JNI JNI_OnLoad函数，如果你不写JNI_OnLoad，默认就有JNI_OnLoad，如果你写JNI_OnLoad函数 覆写默认的JNI_OnLoad函数
 extern "C"
-JNIEXPORT jint JNI_OnLoad(JavaVM *javaVm, void *) {
 
+// JavaVM *javaVM = NULL;
+JNIEXPORT jint JNI_OnLoad(JavaVM *javaVm, void *) {
+    //可以在该函数中保存JavaVM指针来供全局使用
+    //javaVM = vm;
 
     JNIEnv *jniEnv = nullptr;
     int result = javaVm->GetEnv(reinterpret_cast<void **>(&jniEnv), JNI_VERSION_1_6);

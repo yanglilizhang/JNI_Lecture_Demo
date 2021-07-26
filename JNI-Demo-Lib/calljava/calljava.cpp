@@ -11,7 +11,7 @@ using namespace std;
 JNIEXPORT void JNICALL Java_com_jni_calljava_TestCallJavaObject_putObject
         (JNIEnv *env, jobject thiz, jobject student) {
 
-    // 1.寻找类 Student
+    // 1.寻找类 Student-->获取某个对象的"类"
     cout << "---------寻找类 Student---------------" << endl;
     jclass studentClass1 = env->FindClass("com/jni/calljava/Student"); // 第一种
     jclass studentClass2 = env->GetObjectClass(student); // 第二种
@@ -48,13 +48,16 @@ JNIEXPORT void JNICALL Java_com_jni_calljava_TestCallJavaObject_putObject
 
 }
 
+//对象操作
+//直接创建一个Java对象AllocObject
+//根据某个构造函数来创建Java对象NewObject/NewObjectA/NewObjectV
 JNIEXPORT void JNICALL Java_com_jni_calljava_TestCallJavaObject_insertObject
         (JNIEnv *env, jobject thiz) {
 
     // 1.通过包名+类名的方式 拿到 Student class  凭空拿class
     jclass studentClass = env->FindClass("com/jni/calljava/Student"); // 第一种
 
-    // 2.通过student的class  实例化此Student对象   C++ new Student
+    // 2.通过student的class  实例化此Student对象   C++ new Student *直接创建一个Java对象AllocObject*
     jobject studentObj = env->AllocObject(studentClass); // AllocObject 只实例化对象，不会调用对象的构造函数
 
     // 3.方法签名的规则
@@ -113,6 +116,20 @@ JNIEXPORT void JNICALL Java_com_jni_calljava_TestCallJavaObject_testQuote
     env->DeleteLocalRef(dog); // 释放
 }
 
+//给对象obj创建一个全局引用，obj可以是全局或局部引用。
+//全局引用必须通过DeleteGlobalRef()显示处理。
+//jobject NewGlobalRef(JNIEnv *env,object obj);全局引用jobject，如果内存溢出则返回NULL
+
+ 
+//删除全局引用DeleteGlobalRef
+//删除局部引用DeleteLocalRef
+//创建一个局部引用NewLocalRef
+//释放一个局部引用PopLocalFrame
+//设定局部变量的容量EnsureLocalCapacity
+
+//弱全局引用
+//创建全局弱引用NewWeakGlobalRef
+//删除全局弱引用DeleteWeakGlobalRef
 
 
 JNIEXPORT void JNICALL Java_com_jni_calljava_TestCallJavaObject_delQuote
