@@ -8,6 +8,9 @@
 
 using namespace std;
 
+// FindClass是通过传java中完整的类名来查找java的class，
+// 而GetObjectClass是通过传入jni中的一个java的引用来获取该引用的类型。
+// 前者要求你必须知道完整的类名，后者要求在Jni有一个类的引用。
 JNIEXPORT void JNICALL Java_com_jni_calljava_TestCallJavaObject_putObject
         (JNIEnv *env, jobject thiz, jobject student) {
 
